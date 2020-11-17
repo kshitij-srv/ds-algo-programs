@@ -128,6 +128,8 @@ public class SinglyLinkedList {
         length--;
         return nextNode;
       }
+      currentNode = nextNode;
+      nextNode = nextNode.getNext();
     }
     
     return null;
