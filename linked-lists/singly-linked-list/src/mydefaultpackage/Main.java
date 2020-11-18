@@ -20,6 +20,8 @@ public class Main {
     myList.printList();
     System.out.println();
     System.out.println(myList.listLength());
+    System.out.printf("2nd node from the end: %d", myList.nthNodeFromTheEnd(2).getData());
+    System.out.println();
     myList.removeMatchedNode(new ListNode(20));
     myList.printList();
     System.out.println();

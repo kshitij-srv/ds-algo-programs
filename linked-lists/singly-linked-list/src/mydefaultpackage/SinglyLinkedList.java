@@ -169,6 +169,30 @@ public class SinglyLinkedList {
     return nextNode;
   }
 
+  public synchronized ListNode nthNodeFromTheEnd(int position) {
+    ListNode pTemp = head;
+    ListNode pNthNode = null;
+
+    for (int i = 1; i < position; i++) {
+      if (pTemp != null) {
+        pTemp = pTemp.getNext();
+      } else {
+        i = position;
+      }
+    }
+
+    while (pTemp != null) {
+      if (pNthNode == null) {
+        pNthNode = head;
+      } else {
+        pNthNode = pNthNode.getNext();
+      }
+      pTemp = pTemp.getNext();
+    }
+
+    return pNthNode;
+  }
+
   public synchronized void clearList() {
     head = null;
     length = 0;
