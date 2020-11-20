@@ -193,6 +193,15 @@ public class SinglyLinkedList {
     return pNthNode;
   }
 
+  public synchronized void reverseLinkedList(ListNode prev, ListNode current) {
+    if(current == null) {
+        return;
+    }
+    ListNode next = current.getNext();
+    reverseLinkedList(current, next);
+    current.setNext(prev);
+  }
+
   public synchronized void clearList() {
     head = null;
     length = 0;
