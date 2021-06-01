@@ -63,11 +63,12 @@ public class DoublyLinkedList {
       head = node;
     } else if (position == 1) {
       node.setNext(head);
+      head.setPrev(node);
       head = node;
     } else {
       DListNode currentNode = head;
 
-      for (int i = 2; i < position; i++) {
+      for (int i = 0; i < position - 2; i++) {
         currentNode = currentNode.getNext();
       }
       node.setNext(currentNode.getNext());
@@ -174,7 +175,7 @@ public class DoublyLinkedList {
 
     DListNode nextNode = currentNode.getNext();
 
-    for (int i = 2; i < position; i++) {
+    for (int i = 0; i < position - 2; i++) {
       currentNode = nextNode;
       nextNode = nextNode.getNext();
     }
