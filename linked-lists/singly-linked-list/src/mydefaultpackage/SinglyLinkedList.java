@@ -31,6 +31,8 @@ public class SinglyLinkedList {
     length++;
   }
 
+  // this method can be optimized with a little memory trade-off
+  // by maintaining a tail node to track the last list item
   public synchronized void insertAtEnd(ListNode node) {
     if (head == null) {
       head = node;
@@ -61,7 +63,7 @@ public class SinglyLinkedList {
     } else {
       ListNode currentNode = head;
 
-      for (int i = 2; i < position; i++) {
+      for (int i = 0; i < position - 2; i++) {
         currentNode = currentNode.getNext();
       }
       node.setNext(currentNode.getNext());
@@ -158,7 +160,7 @@ public class SinglyLinkedList {
 
     ListNode nextNode = currentNode.getNext();
 
-    for (int i = 2; i < position; i++) {
+    for (int i = 0; i < position - 2; i++) {
       currentNode = nextNode;
       nextNode = nextNode.getNext();
     }
@@ -193,13 +195,28 @@ public class SinglyLinkedList {
     return pNthNode;
   }
 
-  public synchronized void reverseLinkedList(ListNode prev, ListNode current) {
+  public synchronized void reverseLinkedListRecursive(ListNode prev, ListNode current) {
     if(current == null) {
-        return;
+      head = prev;
+      return;
     }
     ListNode next = current.getNext();
-    reverseLinkedList(current, next);
+    reverseLinkedListRecursive(current, next);
     current.setNext(prev);
+  }
+
+  public synchronized void reverseLinkedList() {
+    ListNode currentNode = head;
+    ListNode previousNode = null;
+    ListNode nextNode = null;
+
+    while (currentNode != null) {
+      nextNode = currentNode.getNext();
+      currentNode.setNext(previousNode);
+      previousNode = currentNode;
+      currentNode = nextNode;
+    }
+    head = previousNode;
   }
 
   public synchronized void clearList() {

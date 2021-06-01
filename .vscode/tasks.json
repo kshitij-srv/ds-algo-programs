@@ -11,7 +11,7 @@
     "tasks": [
         {
             "label": "build",
-            "args": ["-g", "${file}", "-d", "bin/"],
+            "args": ["-g", "-sourcepath", "../", "${file}", "-d", "bin/"],
             "command": "javac",
             "group": {
                 "kind": "build",
