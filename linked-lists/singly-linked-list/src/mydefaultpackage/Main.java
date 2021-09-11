@@ -39,7 +39,7 @@ public class Main {
     System.out.println();
     System.out.println(myList.listLength());
     // 9
-    System.out.println(myList.getHead());
+    System.out.println(myList.getHead().getData());
     myList.reverseLinkedListRecursive(null, myList.getHead());
     myList.printList();
     System.out.println();

@@ -5,7 +5,8 @@ public class SinglyLinkedList {
   ListNode head;
 
   public SinglyLinkedList() {
-    length = 0;
+    this.length = 0;
+    this.head = null;
   }
 
   public synchronized ListNode getHead() {
@@ -13,7 +14,7 @@ public class SinglyLinkedList {
   }
 
   public synchronized void printList() {
-    ListNode currentNode = head;
+    ListNode currentNode = this.head;
 
     while (currentNode != null) {
       System.out.printf("%d -> ", currentNode.getData());
@@ -22,28 +23,28 @@ public class SinglyLinkedList {
   }
 
   public synchronized int listLength() {
-    return length;
+    return this.length;
   }
 
   public synchronized void insertAtBeginning(ListNode node) {
-    node.setNext(head);
-    head = node;
-    length++;
+    node.setNext(this.head);
+    this.head = node;
+    this.length++;
   }
 
   // this method can be optimized with a little memory trade-off
   // by maintaining a tail node to track the last list item
   public synchronized void insertAtEnd(ListNode node) {
-    if (head == null) {
-      head = node;
+    if (this.head == null) {
+      this.head = node;
     } else {
-      ListNode currentNode = head;
+      ListNode currentNode = this.head;
       while(currentNode.getNext() != null) {
         currentNode = currentNode.getNext();
       }
       currentNode.setNext(node);
     }
-    length++;
+    this.length++;
   }
 
   public synchronized void insertAtPosition(ListNode node, int position) {
@@ -55,13 +56,13 @@ public class SinglyLinkedList {
       position = length + 1;
     }
 
-    if (head == null) {
-      head = node;
+    if (this.head == null) {
+      this.head = node;
     } else if (position == 1) {
-      node.setNext(head);
-      head = node;
+      node.setNext(this.head);
+      this.head = node;
     } else {
-      ListNode currentNode = head;
+      ListNode currentNode = this.head;
 
       for (int i = 0; i < position - 2; i++) {
         currentNode = currentNode.getNext();
@@ -70,29 +71,29 @@ public class SinglyLinkedList {
       currentNode.setNext(node);
     }
 
-    length++;
+    this.length++;
   }
 
   public synchronized ListNode removeFromBeginning() {
-    ListNode currentNode = head;
-    if (head != null) {
-      head = head.getNext();
+    ListNode currentNode = this.head;
+    if (this.head != null) {
+      this.head = this.head.getNext();
       currentNode.setNext(null);
-      length--;
+      this.length--;
     }
     return currentNode;
   }
 
   public synchronized ListNode removeFromEnd() {
-    ListNode currentNode = head;
+    ListNode currentNode = this.head;
 
-    if (head == null) {
+    if (this.head == null) {
       return null;
     }
 
-    if (head.getNext() == null) {
-      head = null;
-      length--;
+    if (this.head.getNext() == null) {
+      this.head = null;
+      this.length--;
       return currentNode;
     }
     
@@ -105,20 +106,20 @@ public class SinglyLinkedList {
 
     currentNode.setNext(null);
 
-    length--;
+    this.length--;
     return nextNode;
   }
 
   public synchronized ListNode removeMatchedNode(ListNode node) {
-    ListNode currentNode = head;
+    ListNode currentNode = this.head;
 
-    if (head == null) {
+    if (this.head == null) {
       return null;
     }
 
-    if (head.getData() == node.getData()) {
-      head = head.getNext();
-      length--;
+    if (this.head.getData() == node.getData()) {
+      this.head = this.head.getNext();
+      this.length--;
       return currentNode;
     }
 
@@ -127,7 +128,7 @@ public class SinglyLinkedList {
     while (nextNode != null) {
       if (nextNode.getData() == node.getData()) {
         currentNode.setNext(nextNode.getNext());
-        length--;
+        this.length--;
         return nextNode;
       }
       currentNode = nextNode;
@@ -138,9 +139,9 @@ public class SinglyLinkedList {
   }
 
   public synchronized ListNode removeFromPosition(int position) {
-    ListNode currentNode = head;
+    ListNode currentNode = this.head;
 
-    if (head == null) {
+    if (this.head == null) {
       return null;
     }
     
@@ -153,8 +154,8 @@ public class SinglyLinkedList {
     }
 
     if (position == 1) {
-      head = head.getNext();
-      length--;
+      this.head = this.head.getNext();
+      this.length--;
       return currentNode;
     }
 
@@ -167,12 +168,12 @@ public class SinglyLinkedList {
 
     currentNode.setNext(nextNode.getNext());
 
-    length--;
+    this.length--;
     return nextNode;
   }
 
   public synchronized ListNode nthNodeFromTheEnd(int position) {
-    ListNode pTemp = head;
+    ListNode pTemp = this.head;
     ListNode pNthNode = null;
 
     for (int i = 1; i < position; i++) {
@@ -197,7 +198,7 @@ public class SinglyLinkedList {
 
   public synchronized void reverseLinkedListRecursive(ListNode prev, ListNode current) {
     if(current == null) {
-      head = prev;
+      this.head = prev;
       return;
     }
     ListNode next = current.getNext();
@@ -216,11 +217,11 @@ public class SinglyLinkedList {
       previousNode = currentNode;
       currentNode = nextNode;
     }
-    head = previousNode;
+    this.head = previousNode;
   }
 
   public synchronized void clearList() {
-    head = null;
-    length = 0;
+    this.head = null;
+    this.length = 0;
   }
 }
