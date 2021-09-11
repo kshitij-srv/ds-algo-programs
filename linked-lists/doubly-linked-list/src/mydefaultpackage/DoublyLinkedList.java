@@ -5,7 +5,7 @@ public class DoublyLinkedList {
   DListNode head;
 
   public DoublyLinkedList() {
-    length = 0;
+    this.length = 0;
   }
 
   public synchronized DListNode getHead() {
@@ -13,7 +13,7 @@ public class DoublyLinkedList {
   }
 
   public synchronized void printList() {
-    DListNode currentNode = head;
+    DListNode currentNode = this.head;
 
     while (currentNode != null) {
       System.out.printf("<- %d -> ", currentNode.getData());
@@ -22,32 +22,32 @@ public class DoublyLinkedList {
   }
 
   public synchronized int listLength() {
-    return length;
+    return this.length;
   }
 
   public synchronized void insertAtBeginning(DListNode node) {
-    if (head == null) {
-      head = node;
+    if (this.head == null) {
+      this.head = node;
     } else {
-      node.setNext(head);
-      head.setPrev(node);
-      head = node;
+      node.setNext(this.head);
+      this.head.setPrev(node);
+      this.head = node;
     }
-    length++;
+    this.length++;
   }
 
   public synchronized void insertAtEnd(DListNode node) {
-    if (head == null) {
-      head = node;
+    if (this.head == null) {
+      this.head = node;
     } else {
-      DListNode currentNode = head;
+      DListNode currentNode = this.head;
       while(currentNode.getNext() != null) {
         currentNode = currentNode.getNext();
       }
       currentNode.setNext(node);
       node.setPrev(currentNode);
     }
-    length++;
+    this.length++;
   }
 
   public synchronized void insertAtPosition(DListNode node, int position) {
@@ -55,18 +55,18 @@ public class DoublyLinkedList {
       position = 1;
     }
 
-    if (position > length + 1) {
-      position = length + 1;
+    if (position > this.length + 1) {
+      position = this.length + 1;
     }
 
-    if (head == null) {
-      head = node;
+    if (this.head == null) {
+      this.head = node;
     } else if (position == 1) {
-      node.setNext(head);
-      head.setPrev(node);
-      head = node;
+      node.setNext(this.head);
+      this.head.setPrev(node);
+      this.head = node;
     } else {
-      DListNode currentNode = head;
+      DListNode currentNode = this.head;
 
       for (int i = 0; i < position - 2; i++) {
         currentNode = currentNode.getNext();
@@ -76,30 +76,30 @@ public class DoublyLinkedList {
       currentNode.setNext(node);
     }
 
-    length++;
+    this.length++;
   }
 
   public synchronized DListNode removeFromBeginning() {
-    DListNode currentNode = head;
-    if (head != null) {
-      head = head.getNext();
-      head.setPrev(null);
+    DListNode currentNode = this.head;
+    if (this.head != null) {
+      this.head = this.head.getNext();
+      this.head.setPrev(null);
       currentNode.setNext(null);
-      length--;
+      this.length--;
     }
     return currentNode;
   }
 
   public synchronized DListNode removeFromEnd() {
-    DListNode currentNode = head;
+    DListNode currentNode = this.head;
 
-    if (head == null) {
+    if (this.head == null) {
       return null;
     }
 
-    if (head.getNext() == null) {
-      head = null;
-      length--;
+    if (this.head.getNext() == null) {
+      this.head = null;
+      this.length--;
       return currentNode;
     }
     
@@ -113,22 +113,22 @@ public class DoublyLinkedList {
     currentNode.setNext(null);
     nextNode.setPrev(null);
 
-    length--;
+    this.length--;
     return nextNode;
   }
 
   public synchronized DListNode removeMatchedNode(DListNode node) {
-    DListNode currentNode = head;
+    DListNode currentNode = this.head;
 
-    if (head == null) {
+    if (this.head == null) {
       return null;
     }
 
-    if (head.getData() == node.getData()) {
-      head = head.getNext();
-      head.setPrev(null);
+    if (this.head.getData() == node.getData()) {
+      this.head = this.head.getNext();
+      this.head.setPrev(null);
       currentNode.setNext(null);
-      length--;
+      this.length--;
       return currentNode;
     }
 
@@ -140,7 +140,7 @@ public class DoublyLinkedList {
         nextNode.getNext().setPrev(currentNode);
         nextNode.setNext(null);
         nextNode.setPrev(null);
-        length--;
+        this.length--;
         return nextNode;
       }
       currentNode = nextNode;
@@ -151,9 +151,9 @@ public class DoublyLinkedList {
   }
 
   public synchronized DListNode removeFromPosition(int position) {
-    DListNode currentNode = head;
+    DListNode currentNode = this.head;
 
-    if (head == null) {
+    if (this.head == null) {
       return null;
     }
     
@@ -161,15 +161,15 @@ public class DoublyLinkedList {
       position = 1;
     }
 
-    if (position > length) {
-      position = length;
+    if (position > this.length) {
+      position = this.length;
     }
 
     if (position == 1) {
-      head = head.getNext();
-      head.setPrev(null);
+      this.head = this.head.getNext();
+      this.head.setPrev(null);
       currentNode.setNext(null);
-      length--;
+      this.length--;
       return currentNode;
     }
 
@@ -185,12 +185,12 @@ public class DoublyLinkedList {
     nextNode.setNext(null);
     nextNode.setPrev(null);
 
-    length--;
+    this.length--;
     return nextNode;
   }
 
   public synchronized void clearList() {
-    head = null;
-    length = 0;
+    this.head = null;
+    this.length = 0;
   }
 }
