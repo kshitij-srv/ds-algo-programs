@@ -17,22 +17,22 @@ public class ArrayStack {
 
     public ArrayStack(int capacity) {
         this.capacity = capacity;
-        stack = new int[this.capacity];
+        this.stack = new int[this.capacity];
     }
 
     // get stack size in O(1) time
     public int stackSize() {
-        return top + 1;
+        return this.top + 1;
     }
 
     // check if stack is empty
     public boolean isEmpty() {
-        return top < 0;
+        return this.top < 0;
     }
 
     // check if stack is full
     public boolean isFull() {
-        return stackSize() == capacity;
+        return stackSize() == this.capacity;
     }
 
     // insert new element on top of stack
@@ -40,7 +40,7 @@ public class ArrayStack {
         if (isFull()) {
             throw new Exception("Stack is full");
         }
-        stack[++top] = data;
+        this.stack[++this.top] = data;
     }
 
     // peek the top element of the stack
@@ -48,7 +48,7 @@ public class ArrayStack {
         if (isEmpty()) {
             throw new Exception("Stack is empty");
         }
-        return stack[top];
+        return this.stack[this.top];
     }
 
     // remove top element from stack
@@ -56,8 +56,8 @@ public class ArrayStack {
         if (isEmpty()) {
             throw new Exception("Stack is empty");
         }
-        int data = stack[top];
-        stack[top--] = Integer.MIN_VALUE;
+        int data = this.stack[this.top];
+        this.stack[this.top--] = Integer.MIN_VALUE;
         return data;
     }
 
@@ -67,12 +67,12 @@ public class ArrayStack {
         int size = stackSize();
 
         if (size > 0) {
-            s += stack[0];
+            s += this.stack[0];
         }
 
         if (size > 1) {
             for (int i = 1; i < size; i++) {
-                s += ", " + stack[i];
+                s += ", " + this.stack[i];
             }
         }
 
