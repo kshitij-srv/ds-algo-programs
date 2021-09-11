@@ -14,62 +14,62 @@ public class ArrayQueue {
 
     public ArrayQueue(int capacity) {
         this.capacity = capacity;
-        queue = new int[this.capacity];
-        size = 0;
-        front = -1;
-        rear = -1;
+        this.queue = new int[this.capacity];
+        this.size = 0;
+        this.front = -1;
+        this.rear = -1;
     }
 
     // insert element into queue
     public void enqueue(int data) throws IllegalStateException {
-        if (size == capacity) {
+        if (this.size == this.capacity) {
             throw new IllegalStateException("Overflow [" + Integer.toString(data) + "]: queue is full");
         }
-        rear = (rear + 1) % capacity;
-        if (front == -1) {
-            front = rear;
+        this.rear = (this.rear + 1) % this.capacity;
+        if (this.front == -1) {
+            this.front = this.rear;
         }
-        queue[rear] = data;
-        size++;
+        this.queue[this.rear] = data;
+        this.size++;
     }
 
     // remove element from queue
     public int dequeue() throws IllegalStateException {
-        if (size == 0) {
+        if (this.size == 0) {
             throw new IllegalStateException("Underflow: queue is empty");
         }
-        int data = queue[front];
-        queue[front] = Integer.MIN_VALUE;
-        front = (front + 1) % capacity;
-        size--;
+        int data = this.queue[this.front];
+        this.queue[this.front] = Integer.MIN_VALUE;
+        this.front = (this.front + 1) % this.capacity;
+        this.size--;
         return data;
     }
 
     // check if queue is empty
     public boolean isEmpty() {
-        return size == 0;
+        return this.size == 0;
     }
 
     // check is queue is full
     public boolean isFull() {
-        return size == capacity;
+        return this.size == this.capacity;
     }
 
     // get size of queue
     public int size() {
-        return size;
+        return this.size;
     }
 
     // print the contents of the queue
     public String toString() {
         String str = "";
-        if (size > 0) {
-            int tempFront = front;
-            str = Integer.toString(queue[tempFront]);
-            tempFront = (tempFront + 1) % capacity;
-            for (int i = 1; i < size; i++) {
-                str += ", " + Integer.toString(queue[tempFront]);
-                tempFront = (tempFront + 1) % capacity;
+        if (this.size > 0) {
+            int tempFront = this.front;
+            str = Integer.toString(this.queue[tempFront]);
+            tempFront = (tempFront + 1) % this.capacity;
+            for (int i = 1; i < this.size; i++) {
+                str += ", " + Integer.toString(this.queue[tempFront]);
+                tempFront = (tempFront + 1) % this.capacity;
             }
         }
         return "[" + str + "]";
