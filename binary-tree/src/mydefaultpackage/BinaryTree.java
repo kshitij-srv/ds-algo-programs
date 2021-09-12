@@ -132,8 +132,13 @@ public class BinaryTree {
         if (root == null) {
             return 0;
         }
-        int heightOfLeftSubTree = getHeight(root.getLeft());
-        int heightOfRightSubTree = getHeight(root.getRight());
+        BTNode left = root.getLeft();
+        BTNode right = root.getRight();
+        if (left == null && right == null) {
+            return 0;
+        }
+        int heightOfLeftSubTree = getHeight(left);
+        int heightOfRightSubTree = getHeight(right);
         if (heightOfLeftSubTree >= heightOfRightSubTree) {
             return heightOfLeftSubTree + 1;
         } else {
@@ -158,7 +163,7 @@ public class BinaryTree {
     /** start */
     public void printPaths(BTNode root) {
         ArrayList<Integer> path = new ArrayList<Integer>();
-        printPathHelper(root, path, 1);
+        printPathHelper(root, path, 0);
     }
 
     public void printPathHelper(BTNode root, ArrayList<Integer> path, int pathLength) {
@@ -168,7 +173,8 @@ public class BinaryTree {
         path.add(pathLength, root.getData());
         pathLength++;
         if (root.getLeft() == null && root.getRight() == null) {
-            System.out.println(path);
+            // print sub-list to avoid printing undesirable data from previous iterations
+            System.out.println(path.subList(0, pathLength));
         } else {
             printPathHelper(root.getLeft(), path, pathLength);
             printPathHelper(root.getRight(), path, pathLength);
